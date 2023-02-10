@@ -1,0 +1,14 @@
+let myobj = [
+    {id:1, name: 'John', address: 'Highway 71' ,status:"OK",disease:"Fever"},
+    {id:2, name: 'Peter', address: 'Lowstreet 4',status:"OK",disease:"Cancer" },
+    {id:3, name: 'Amy', address: 'Apple st 652',status:"OK",disease:"Flu" },
+    {id:4, name: 'Hannah', address: 'Mountain 21',status:"OK" ,disease:"Oprate"},
+    {id:5, name: 'Michael', address: 'Valley 345',status:"OK" ,disease:"Dengu"},
+    {id:6, name: 'Sandy', address: 'Ocean blvd 2',status:"OK",disease:"NO" },
+    {id:7, name: 'Betty', address: 'Green Grass 1',status:"OK",disease:"Flu" },
+    {id:8, name: 'Richard', address: 'Sky st 331',status:"OK",disease:"NO" },
+    {id:9, name: 'Susan', address: 'One way 98',status:"OK",disease:"Flu" },
+    {id:10, name: 'Vicky', address: 'Yellow Garden 2',status:"OK",disease:"Fever" },
+    {id:11, name: 'Ben', address: 'Park Lane 38',status:"OK",disease:"Dengu" },
+
+];
