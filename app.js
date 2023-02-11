@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+const { ApolloServer } = require('apollo-server');
+const {typeDefs} = require("./graphql/types");
+
 
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -12,16 +15,16 @@ app.use(express.json());
 app.use(cors());
 
 // Routes Exports
-const doctorRoute = require("./route/Doctor");
+const resolvers = require("./route/Doctor");
 const slotsRoute = require("./route/Slots");
 const patientRoute = require("./route/Patient");
 //schema
 const patientSchema = require("./schema/patient")
 
 //doctor and sloute route
-app.use("/", doctorRoute);
-app.use("/",slotsRoute);
-app.use("/",patientRoute);
+// app.use("/", doctorRoute);
+app.use("/", slotsRoute);
+app.use("/", patientRoute);
 
 //base route
 app.get("/", (req, res) => {
@@ -29,10 +32,24 @@ app.get("/", (req, res) => {
     console.log('====================================');
     console.log('zain this api is working');
     console.log('====================================');
-  });
+});
+//apollo server
+const server = new ApolloServer({
+    typeDefs, resolvers
 
-mongoose.connect(process.env.CONNECTION_URL).then(() => { 
+})
+// server.applyMiddleware({ app })
+const url = process.env.APOLLO_SERVER_URL;
+server.listen().then(({ url }) => {
+    console.log(`Server ready at ${url}api`);
+  });
+console.log(`Server is ready at ${url}`);
+
+//mongodb connection
+mongoose.connect(process.env.CONNECTION_URL).then(() => {
     app.listen(process.env.PORT, () => {
-        console.log("running");
+        console.log(
+            `Server started & listening on ${process.env.PORT}`
+        )
     });
 });
