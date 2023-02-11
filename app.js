@@ -4,6 +4,7 @@ const app = express();
 
 const cors = require("cors");
 const mongoose = require("mongoose");
+mongoose.pluralize(null);
 
 require('dotenv').config();
 
@@ -14,11 +15,13 @@ app.use(cors());
 const doctorRoute = require("./route/Doctor");
 const slotsRoute = require("./route/Slots");
 const patientRoute = require("./route/Patient");
+//schema
+const patientSchema = require("./schema/patient")
 
 //doctor and sloute route
 app.use("/", doctorRoute);
 app.use("/",slotsRoute);
-app.use("/",patientRoute)
+app.use("/",patientRoute);
 
 //base route
 app.get("/", (req, res) => {
@@ -27,8 +30,6 @@ app.get("/", (req, res) => {
     console.log('zain this api is working');
     console.log('====================================');
   });
-
-  //connection With Live Server
 
 mongoose.connect(process.env.CONNECTION_URL).then(() => { 
     app.listen(process.env.PORT, () => {
