@@ -20,7 +20,7 @@ const Doctor = require("../schema/doctors")
 
 const router = {
     Query: {
-        doctorsData: async () => {
+        doctorsData: async (_,{}) => {
 
             let doctorsDetail = await Doctor.find();
             console.log(doctorsDetail);

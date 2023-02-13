@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 const { ApolloServer } = require('apollo-server');
-const {typeDefs} = require("./graphql/types");
+const schema = require("./graphql")
 
 
 const cors = require("cors");
@@ -15,11 +15,9 @@ app.use(express.json());
 app.use(cors());
 
 // Routes Exports
-const resolvers = require("./route/Doctor");
+// const resolvers = require("./route/Doctor");
 const slotsRoute = require("./route/Slots");
 const patientRoute = require("./route/Patient");
-//schema
-const patientSchema = require("./schema/patient")
 
 //doctor and sloute route
 // app.use("/", doctorRoute);
@@ -35,7 +33,7 @@ app.get("/", (req, res) => {
 });
 //apollo server
 const server = new ApolloServer({
-    typeDefs, resolvers
+    schema
 
 })
 // server.applyMiddleware({ app })

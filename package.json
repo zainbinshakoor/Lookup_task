@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@graphql-tools/load-files": "^6.6.1",
     "apollo-server": "^3.11.1",
     "apollo-server-express": "^3.11.1",
     "cors": "^2.8.5",
