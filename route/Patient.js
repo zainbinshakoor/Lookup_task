@@ -5,7 +5,8 @@ const router = express.Router();
 const patient = require("../schema/patient")
 
 
-router.get('/patient', async (req, res) => {
+router.get('/patient',
+async (req, res) => {
 
     const patientList = await patient.aggregate([
         {
@@ -37,6 +38,7 @@ router.get('/patient', async (req, res) => {
     res.send(patientList)
 
 
-})
+}
+)
 
 module.exports = router
