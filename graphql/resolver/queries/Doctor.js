@@ -26,14 +26,18 @@ const router = {
                 {
         
                     $lookup: {
-                        from: 'slots',
-                        localField: 'name',
-                        foreignField: 'name',
-                        as: 'slots_patient'
+                        from: 'patient',
+                        localField: 'id',
+                        foreignField: 'id',
+                        as: 'patientDeatils'
                     }
-                }
+                },
+                {$unwind: '$patientDeatils'},
+                
         
             ])
+            console.log(doctorList)
+            
             return doctorList
         }
 

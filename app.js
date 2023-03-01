@@ -23,7 +23,7 @@ const patientRoute = require("./route/Patient");
 // app.use("/", doctorRoute);
 app.use("/", slotsRoute);
 app.use("/", patientRoute);
-
+    
 //base route
 app.get("/", (req, res) => {
     res.send("ZAINBINSHAKOOR Responding from HTTP Server");
