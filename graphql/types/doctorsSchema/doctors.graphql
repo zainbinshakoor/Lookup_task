@@ -1,11 +1,24 @@
-type doctors {
+type patientsDetail{
+ _id: ID
+      id: Int
+      name: String
+      address: String
+      status: String
+      disease:String
+
+}
+
+  type doctors {
   name: String
   id:Int
   address:String
   _id:ID
+  patientDeatil:patientsDetail
 }
+
  type Query {
-  doctorsData:[doctors]
+  doctorsData(Id:Int):[doctors]
+
 }
 
 
