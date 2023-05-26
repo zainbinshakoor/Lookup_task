@@ -33,7 +33,10 @@ app.get("/", (req, res) => {
 });
 //apollo server
 const server = new ApolloServer({
-    schema
+    schema,
+    playground:{
+        endpoint:"http://localhost:4000/api"
+    }
 
 })
 // server.applyMiddleware({ app })

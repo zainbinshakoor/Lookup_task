@@ -1,35 +1,28 @@
-type patientsDetail{
- _id: ID
-      id: Int
-      name: String
-      address: String
-      status: String
-      disease:String
-
+type patientsDetails {
+  status: String
+  disease: String
 }
 
-  type doctors {
+type doctors {
   name: String
-  id:Int
-  address:String
-  _id:ID
-  patientDeatil:patientsDetail
+  id: Int
+  address: String
+  _id: ID
+  patientDetail: patientsDetails
 }
 
- type Query {
-  doctorsData(Id:Int):[doctors]
-
+type Query {
+  doctorsData(Id: Int): [doctors]
 }
-
 
 type patients {
   name: String
-  id:Int
-  address:String
-  _id:ID
-  disease:String
-  status:String
+  id: Int
+  address: String
+  _id: ID
+  disease: String
+  status: String
 }
- type Query {
-  patientsData:patients
+type Query {
+  patientsData: patients
 }

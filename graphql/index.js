@@ -5,6 +5,7 @@ const resolvers = require('./resolver')
 const schema = makeExecutableSchema({
     typeDefs,
     resolvers,
+    playground:false
 })
 
 module.exports = schema;

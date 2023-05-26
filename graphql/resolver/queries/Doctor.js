@@ -19,37 +19,42 @@ const doctor = require("../../../schema/doctors")
 
 
 const router = {
-    Query: {
-        doctorsData: async (_, { Id }) => {
-            console.log(Id);
+  Query: {
+    doctorsData: async (_, {  }) => {
+      let searchTerm = "Female";
+      const regex = new RegExp(`^${searchTerm}`, "i");
 
-            const doctorList = await doctor.aggregate([
-                {
+      const doctorList = await doctor.aggregate([
+        {
 
-                    $lookup: {
-                        from: 'patient',
-                        localField: 'id',
-                        foreignField: 'id',
-                        as: 'patientDeatil'
-                    }
-                },
-                {
-                    $unwind: '$patientDeatil'
-                },
-                {
-                    $match: {
-                        id: Id
-                    }
-                }
+          $lookup: {
+            from: 'patients',
+            localField: 'id',
+            foreignField: 'id',
+            as: 'patientDetail'
+          },
 
 
-            ])
-            console.log(doctorList)
+        },
+        {
+          $unwind: "$patientDetail"
+        },
+        {
+          $match: {
 
-            return doctorList
+            'patientDetail.status': { $regex: regex }
+
+          }
         }
 
+
+      ])
+      console.log(doctorList)
+
+      return doctorList
     }
+
+  }
 
 }
 module.exports = router
