@@ -1,12 +1,12 @@
 const express = require("express");
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer } = require("apollo-server-express");
 const schema = require("./graphql");
 
 const cors = require("cors");
 const mongoose = require("mongoose");
 mongoose.pluralize(null);
 
-require('dotenv').config();
+require("dotenv").config();
 
 const app = express();
 app.use(express.json());
@@ -24,32 +24,36 @@ app.use("/", patientRoute);
 
 // base route
 app.get("/", (req, res) => {
-    res.send("ZAINBINSHAKOOR Responding from HTTP Server");
+  res.send("ZAINBINSHAKOOR Responding from HTTP Server");
 });
 
 // apollo server
-const server = new ApolloServer({
+async function startServer() {
+  const server = new ApolloServer({
     schema,
     playground: {
-        endpoint: "/api"
-    }
-});
+      endpoint: "/api",
+    },
+  });
 
-async function startServer() {
-    await server.start();
+  await server.start();
 
-    server.applyMiddleware({ app,path: '/api' });
+  server.applyMiddleware({ app, path: "/api" });
 
-    // mongodb connection
-    mongoose.connect(process.env.CONNECTION_URL)
-        .then(() => {
-            app.listen(process.env.PORT, () => {
-                console.log(`Server started & listening`);
-            });
-        })
-        .catch(error => {
-            console.error("MongoDB connection error:", error);
-        });
+  // mongodb connection
+  mongoose
+    .connect(process.env.CONNECTION_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      app.listen(process.env.PORT, () => {
+        console.log(`Server started & listening on port ${process.env.PORT}`);
+      });
+    })
+    .catch((error) => {
+      console.error("MongoDB connection error:", error);
+    });
 }
 
 startServer();
