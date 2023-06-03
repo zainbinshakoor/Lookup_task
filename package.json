@@ -13,7 +13,7 @@
     "@elastic/elasticsearch": "^8.7.0",
     "@graphql-tools/load-files": "^6.6.1",
     "apollo-server": "^3.11.1",
-    "apollo-server-express": "^3.11.1",
+    "apollo-server-express": "^3.12.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

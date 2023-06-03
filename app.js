@@ -1,9 +1,6 @@
 const express = require("express");
-const app = express();
-
-const { ApolloServer } = require('apollo-server');
-const schema = require("./graphql")
-
+const { ApolloServer } = require('apollo-server-express');
+const schema = require("./graphql");
 
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -11,6 +8,7 @@ mongoose.pluralize(null);
 
 require('dotenv').config();
 
+const app = express();
 app.use(express.json());
 app.use(cors());
 
@@ -19,38 +17,39 @@ app.use(cors());
 const slotsRoute = require("./route/Slots");
 const patientRoute = require("./route/Patient");
 
-//doctor and sloute route
+// doctor and slot route
 // app.use("/", doctorRoute);
 app.use("/", slotsRoute);
 app.use("/", patientRoute);
-    
-//base route
+
+// base route
 app.get("/", (req, res) => {
     res.send("ZAINBINSHAKOOR Responding from HTTP Server");
-    console.log('====================================');
-    console.log('zain this api is working');
-    console.log('====================================');
 });
-//apollo server
+
+// apollo server
 const server = new ApolloServer({
     schema,
-    playground:{
-        endpoint:"http://localhost:4000/api"
+    playground: {
+        endpoint: "/api"
     }
-
-})
-// server.applyMiddleware({ app })
-const url = process.env.APOLLO_SERVER_URL;
-server.listen().then(({ url }) => {
-    console.log(`Server ready at ${url}api`);
-  });
-console.log(`Server is ready at ${url}`);
-
-//mongodb connection
-mongoose.connect(process.env.CONNECTION_URL).then(() => {
-    app.listen(process.env.PORT, () => {
-        console.log(
-            `Server started & listening on ${process.env.PORT}`
-        )
-    });
 });
+
+async function startServer() {
+    await server.start();
+
+    server.applyMiddleware({ app,path: '/api' });
+
+    // mongodb connection
+    mongoose.connect(process.env.CONNECTION_URL)
+        .then(() => {
+            app.listen(process.env.PORT, () => {
+                console.log(`Server started & listening`);
+            });
+        })
+        .catch(error => {
+            console.error("MongoDB connection error:", error);
+        });
+}
+
+startServer();
