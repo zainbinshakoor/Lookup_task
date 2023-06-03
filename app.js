@@ -31,9 +31,9 @@ app.get("/", (req, res) => {
 async function startServer() {
   const server = new ApolloServer({
     schema,
-    playground: {
-      endpoint: "/api",
-    },
+    // playground: {
+    //   endpoint: "/api",
+    // },
   });
 
   await server.start();
