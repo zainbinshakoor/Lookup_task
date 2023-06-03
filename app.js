@@ -31,19 +31,11 @@ app.get("/", (req, res) => {
 async function startServer() {
   const server = new ApolloServer({
     schema,
-    playground: {
-      introspection: true,
-    },
     introspection: true,
     cors: {
       origin: "*",
       credentials: true
     },
-    dataSources: () => {
-      return {
-        schema
-      };
-    }
   });
 
   await server.start();
