@@ -32,15 +32,30 @@ async function startServer() {
   const server = new ApolloServer({
     schema,
     playground: {
-      endpoint: "/api",
       introspection: true,
     },
+    introspection: true,
+    cors: {
+      origin: "*",
+      credentials: true
+    },
+    dataSources: () => {
+      return {
+        schema
+      };
+    }
   });
 
   await server.start();
 
   server.applyMiddleware({ app, path: "/api" });
-
+  app.get("/health-check", (req, res, next) => {
+    res.send(
+      `Server is up and running & listening on ${process.env.PORT}${
+        server.graphqlPath
+      } at Datetime ${new Date()} `
+    );
+  });
   // mongodb connection
   mongoose
     .connect(process.env.CONNECTION_URL, {
