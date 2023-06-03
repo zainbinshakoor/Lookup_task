@@ -50,13 +50,14 @@ async function startServer() {
   });
   // mongodb connection
   mongoose
-    .connect(process.env.CONNECTION_URL, {
+    .connect('mongodb+srv://admin:admin@task.bnelnfv.mongodb.net/task?retryWrites=true&w=majority', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
     .then(() => {
-      app.listen(process.env.PORT, () => {
-        console.log(`Server started & listening on port ${process.env.PORT}`);
+      let port = 8000;
+      app.listen(port, () => {
+        console.log(`Server started & listening on port ${port}`);
       });
     })
     .catch((error) => {
