@@ -38,7 +38,7 @@ const resolvers = {
         return update;
       } catch (error) {
         console.error(error);
-        throw new Error("Failed to update todo");
+        throw new Error("Failed to update's todo");
       }
     },
   },
