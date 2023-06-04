@@ -43,7 +43,7 @@ async function startServer() {
   server.applyMiddleware({ app, path: "/api" });
   app.get("/health-check", (req, res, next) => {
     res.send(
-      `Server is up and running & listening on ${process.env.PORT}${
+      ` Current Server is up and running & listening on ${process.env.PORT}${
         server.graphqlPath
       } at Datetime ${new Date()} `
     );
