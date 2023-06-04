@@ -24,7 +24,7 @@ app.use("/", patientRoute);
 
 // base route
 app.get("/", (req, res) => {
-  res.send("ZAINBINSHAKOOR Responding from HTTP Server");
+  res.send("Zain responding from http rerver");
 });
 
 // apollo server
