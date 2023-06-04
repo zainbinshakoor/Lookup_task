@@ -22,7 +22,7 @@ const resolvers = {
         return deletedTodo;
       } catch (error) {
         console.error(error);
-        throw new Error("Failed to delete todo");
+        throw new Error("Failed to delete's todo");
       }
     },
     updateTodoData: async (parent, args) => {
