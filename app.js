@@ -16,11 +16,16 @@ app.use(cors());
 // const resolvers = require("./route/Doctor");
 const slotsRoute = require("./route/Slots");
 const patientRoute = require("./route/Patient");
+const endpoint = require("./route/singlePoint");
+
 
 // doctor and slot route
 // app.use("/", doctorRoute);
 app.use("/", slotsRoute);
 app.use("/", patientRoute);
+app.use("/", endpoint);
+
+
 
 // base route
 app.get("/", (req, res) => {
